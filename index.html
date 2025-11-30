@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MediCare Hospital | Modern Healthcare Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicon (optional) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Custom Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Poppins", "system-ui", "sans-serif"],
+            },
+            colors: {
+              primary: {
+                DEFAULT: "#0f766e", // teal
+                dark: "#115e59",
+                light: "#ccfbf1",
+              },
+              accent: "#22c55e",
+              dark: "#020617",
+            },
+            boxShadow: {
+              soft: "0 20px 60px rgba(15,23,42,0.16)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Remix Icon (Icon Library) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <!-- AOS (Animate On Scroll) -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+    />
+
+    <!-- Custom Base Styles -->
+    <style>
+      body {
+        font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top left, #ecfeff 0, #f8fafc 45%, #ffffff 100%);
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(148, 163, 184, 0.8);
+        border-radius: 999px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+    </style>
+  </head>
+
+  <body class="bg-transparent text-slate-900 overflow-x-hidden">
+    <!-- ================= NAVBAR ================= -->
+    <header
+      class="sticky top-0 z-50 border-b border-teal-50 bg-white/80 backdrop-blur-xl"
+    >
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-light text-primary shadow-soft"
+          >
+            <i class="ri-hospital-line text-xl"></i>
+          </div>
+          <div>
+            <p class="text-base font-semibold tracking-tight text-slate-900">
+              MediCare
+            </p>
+            <p class="text-xs text-slate-500 -mt-1">Multi-Speciality Hospital</p>
+          </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
+          <a href="#home" class="hover:text-primary">Home</a>
+          <a href="#services" class="hover:text-primary">Services</a>
+          <a href="#doctors" class="hover:text-primary">Doctors</a>
+          <a href="#about" class="hover:text-primary">About</a>
+          <a href="#departments" class="hover:text-primary">Departments</a>
+          <a href="#contact" class="hover:text-primary">Contact</a>
+        </nav>
+
+        <!-- Right CTA -->
+        <div class="hidden items-center gap-3 md:flex">
+          <span class="flex items-center gap-1 text-xs text-slate-500">
+            <i class="ri-phone-fill text-primary"></i>
+            24x7 Emergency
+          </span>
+          <a
+            href="#contact"
+            class="inline-flex items-center gap-1 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white shadow-soft hover:bg-primary-dark"
+          >
+            Book Appointment
+            <i class="ri-arrow-right-up-line text-sm"></i>
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="menu-toggle"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-700 md:hidden"
+          aria-label="Toggle Menu"
+          aria-expanded="false"
+        >
+          <i class="ri-menu-line text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Nav (Animated) -->
+      <div
+        id="mobile-nav"
+        class="max-h-0 overflow-hidden opacity-0 border-t border-slate-100 bg-white md:hidden transition-all duration-300 ease-out"
+      >
+        <nav class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 text-sm font-medium text-slate-700">
+          <a href="#home" class="rounded-lg px-3 py-2 hover:bg-slate-100"
+            >Home</a
+          >
+          <a href="#services" class="rounded-lg px-3 py-2 hover:bg-slate-100"
+            >Services</a
+          >
+          <a href="#doctors" class="rounded-lg px-3 py-2 hover:bg-slate-100"
+            >Doctors</a
+          >
+          <a href="#about" class="rounded-lg px-3 py-2 hover:bg-slate-100"
+            >About</a
+          >
+          <a href="#departments" class="rounded-lg px-3 py-2 hover:bg-slate-100"
+            >Departments</a
+          >
+          <a href="#contact" class="rounded-lg px-3 py-2 hover:bg-slate-100"
+            >Contact</a
+          >
+          <a
+            href="#contact"
+            class="mt-1 inline-flex items-center justify-center gap-1 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-white shadow-soft"
+          >
+            Book Appointment
+            <i class="ri-arrow-right-up-line text-sm"></i>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section
+      id="home"
+      class="relative overflow-hidden bg-gradient-to-b from-teal-50 via-white to-slate-50"
+    >
+      <div
+        class="pointer-events-none absolute -left-10 top-[-80px] h-64 w-64 rounded-full bg-primary-light/70 blur-3xl"
+      ></div>
+      <div
+        class="pointer-events-none absolute -right-10 bottom-[-80px] h-64 w-64 rounded-full bg-sky-100 blur-3xl"
+      ></div>
+
+      <div
+        class="mx-auto flex max-w-7xl flex-col items-center gap-12 px-4 py-12 md:flex-row md:px-6 lg:py-20"
+      >
+        <!-- Left Content -->
+        <div
+          class="relative z-10 max-w-xl space-y-6"
+          data-aos="fade-right"
+        >
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-primary shadow-soft ring-1 ring-teal-100"
+          >
+            <i class="ri-shield-cross-line text-sm"></i>
+            Trusted Care, 24/7
+          </span>
+
+          <h1
+            class="text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl"
+          >
+            Modern Healthcare
+            <span class="text-primary">for Your Family</span>
+          </h1>
+
+          <p class="text-sm leading-relaxed text-slate-600 sm:text-base">
+            MediCare Multi-Speciality Hospital offers advanced treatments,
+            experienced doctors and compassionate care under one roof. Emergency
+            support and online appointments are available round-the-clock.
+          </p>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4">
+            <div
+              class="rounded-2xl bg-white px-3 py-3 text-center shadow-soft ring-1 ring-slate-100"
+            >
+              <p class="text-lg font-semibold text-slate-900 sm:text-xl">
+                50+
+              </p>
+              <p class="text-[11px] text-slate-500 sm:text-xs">
+                Specialist Doctors
+              </p>
+            </div>
+            <div
+              class="rounded-2xl bg-white px-3 py-3 text-center shadow-soft ring-1 ring-slate-100"
+            >
+              <p class="text-lg font-semibold text-slate-900 sm:text-xl">
+                1.2L+
+              </p>
+              <p class="text-[11px] text-slate-500 sm:text-xs">
+                Patients Treated
+              </p>
+            </div>
+            <div
+              class="rounded-2xl bg-white px-3 py-3 text-center shadow-soft ring-1 ring-slate-100"
+            >
+              <p class="text-lg font-semibold text-slate-900 sm:text-xl">
+                24/7
+              </p>
+              <p class="text-[11px] text-slate-500 sm:text-xs">
+                Emergency Care
+              </p>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a
+              href="#contact"
+              class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-primary-dark"
+            >
+              Book Appointment
+              <i class="ri-calendar-check-line text-lg"></i>
+            </a>
+            <a
+              href="#services"
+              class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 hover:border-primary hover:text-primary"
+            >
+              View Services
+              <i class="ri-arrow-down-s-line text-base"></i>
+            </a>
+          </div>
+
+          <!-- Contact Strip -->
+          <div
+            class="mt-3 flex flex-wrap items-center gap-4 text-xs text-slate-600"
+          >
+            <div class="flex items-center gap-2">
+              <span
+                class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-500"
+              >
+                <i class="ri-phone-fill text-lg"></i>
+              </span>
+              <div>
+                <p class="font-semibold text-slate-800">Emergency Helpline</p>
+                <p class="text-[11px] text-slate-500">+91-98765-43210</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="ri-map-pin-2-line text-primary"></i>
+              <p class="text-[11px] text-slate-500">
+                Near City Center, Your City, India
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Image -->
+        <div
+          class="relative z-10 w-full max-w-lg md:w-1/2"
+          data-aos="fade-left"
+        >
+          <div
+            class="relative overflow-hidden rounded-3xl bg-slate-900/5 p-2 shadow-soft"
+          >
+            <img
+              src="https://i.ibb.co/CsPycHTh/451054.jpg"
+              alt="Doctors at MediCare Hospital"
+              class="h-64 w-full rounded-2xl object-cover sm:h-80 lg:h-96"
+            />
+
+            <!-- Floating Card -->
+            <div
+              class="absolute -bottom-4 left-4 flex items-center gap-3 rounded-2xl bg-white/95 px-3 py-3 text-xs shadow-soft backdrop-blur"
+            >
+              <span
+                class="flex h-9 w-9 items-center justify-center rounded-full bg-primary-light text-primary"
+              >
+                <i class="ri-heart-pulse-line text-xl"></i>
+              </span>
+              <div>
+                <p class="text-[11px] font-semibold text-slate-800">
+                  NABH Certified
+                </p>
+                <p class="text-[10px] text-slate-500">
+                  Quality & Patient Safety Standards
+                </p>
+              </div>
+            </div>
+
+            <!-- Top Badge -->
+            <div
+              class="absolute right-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[11px] font-medium text-emerald-600 shadow-soft"
+            >
+              <i class="ri-star-fill text-amber-400"></i>
+              4.9/5 Patient Rating
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section id="services" class="py-14 md:py-18 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 md:px-6">
+        <div
+          class="mx-auto max-w-2xl text-center"
+          data-aos="fade-up"
+        >
+          <p
+            class="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-medium uppercase tracking-wide text-primary"
+          >
+            <i class="ri-first-aid-kit-line text-sm"></i>
+            Our Services
+          </p>
+          <h2
+            class="mt-3 text-balance text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl"
+          >
+            Comprehensive Medical Services
+          </h2>
+          <p class="mt-2 text-sm text-slate-600 md:text-[15px]">
+            From emergency care to advanced surgeries, we ensure safe, timely and
+            accurate treatment supported by modern technology.
+          </p>
+        </div>
+
+        <!-- Cards -->
+        <div
+          class="mt-8 grid gap-6 md:mt-10 md:grid-cols-2 lg:grid-cols-3"
+        >
+          <!-- Card 1 -->
+          <article
+            class="flex flex-col overflow-hidden rounded-3xl bg-white shadow-soft ring-1 ring-slate-100"
+            data-aos="fade-up"
+          >
+            <img
+              src="https://i.ibb.co/qMCQYYqk/best-emergency-trauma-care-hospital-in-noida.jpg"
+              alt="Emergency & Trauma"
+              class="h-44 w-full object-cover md:h-48"
+            />
+            <div class="flex flex-1 flex-col gap-3 p-5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-[15px] font-semibold text-slate-900">
+                  24x7 Emergency & Trauma
+                </h3>
+                <span
+                  class="inline-flex items-center justify-center rounded-full bg-red-50 px-2 py-1 text-[10px] font-semibold text-red-500"
+                >
+                  <i class="ri-flashlight-fill mr-1"></i> 24/7
+                </span>
+              </div>
+              <p class="text-xs leading-relaxed text-slate-600">
+                Dedicated emergency bays, rapid response team and advanced
+                monitoring to handle critical cases without delay.
+              </p>
+              <ul class="mt-1 space-y-1 text-[11px] text-slate-500">
+                <li class="flex items-center gap-1.5">
+                  <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                  Cardiac & stroke emergencies
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                  Fully equipped ambulance service
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article
+            class="flex flex-col overflow-hidden rounded-3xl bg-white shadow-soft ring-1 ring-slate-100"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <img
+              src="https://i.ibb.co/ndRN2R3/diagnostic-services.jpg"
+              alt="Advanced Diagnostics"
+              class="h-44 w-full object-cover md:h-48"
+            />
+            <div class="flex flex-1 flex-col gap-3 p-5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-[15px] font-semibold text-slate-900">
+                  Advanced Diagnostics
+                </h3>
+                <span
+                  class="inline-flex items-center justify-center rounded-full bg-sky-50 px-2 py-1 text-[10px] font-semibold text-sky-500"
+                >
+                  <i class="ri-scan-line mr-1"></i> Imaging
+                </span>
+              </div>
+              <p class="text-xs leading-relaxed text-slate-600">
+                High-precision MRI, CT, ultrasound & lab tests ensuring early
+                detection and accurate diagnosis.
+              </p>
+              <ul class="mt-1 space-y-1 text-[11px] text-slate-500">
+                <li class="flex items-center gap-1.5">
+                  <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                  NABL accredited laboratory
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                  Digital reports on your phone
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article
+            class="flex flex-col overflow-hidden rounded-3xl bg-white shadow-soft ring-1 ring-slate-100"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <img
+              src="https://i.ibb.co/Q3nntT67/ICU-Setup-at-Home.jpg"
+              alt="In-Patient & ICU Care"
+              class="h-44 w-full object-cover md:h-48"
+            />
+            <div class="flex flex-1 flex-col gap-3 p-5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-[15px] font-semibold text-slate-900">
+                  In-Patient & ICU Care
+                </h3>
+                <span
+                  class="inline-flex items-center justify-center rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-500"
+                >
+                  <i class="ri-heart-3-line mr-1"></i> Critical
+                </span>
+              </div>
+              <p class="text-xs leading-relaxed text-slate-600">
+                Hygienic rooms, infection control & continuous monitoring in ICU
+                and HDU for critical patients.
+              </p>
+              <ul class="mt-1 space-y-1 text-[11px] text-slate-500">
+                <li class="flex items-center gap-1.5">
+                  <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                  Cardiac, Neuro & Medical ICU
+                </li>
+                <li class="flex items-center gap-1.5">
+                  <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                  Attendant-friendly rooms
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DOCTORS ================= -->
+    <section
+      id="doctors"
+      class="bg-slate-900 py-14 md:py-18 lg:py-20"
+    >
+      <div class="mx-auto max-w-7xl px-4 md:px-6">
+        <div
+          class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+          data-aos="fade-up"
+        >
+          <div>
+            <p
+              class="inline-flex items-center gap-2 rounded-full bg-slate-800 px-3 py-1 text-xs font-medium uppercase tracking-wide text-teal-300"
+            >
+              <i class="ri-team-line text-sm"></i>
+              Expert Doctors
+            </p>
+            <h2
+              class="mt-3 text-balance text-2xl font-semibold tracking-tight text-white md:text-3xl"
+            >
+              Meet Our Specialist Doctors
+            </h2>
+            <p class="mt-2 text-sm text-slate-300 md:text-[15px]">
+              A highly experienced team of consultants, surgeons and intensivists
+              dedicated to personalised, ethical medical care.
+            </p>
+          </div>
+          <div class="text-xs text-slate-400">
+            <i class="ri-information-line mr-1"></i>
+            Images are placeholders. Replace with your real doctors later.
+          </div>
+        </div>
+
+        <!-- Doctor Cards -->
+        <div
+          class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+        >
+          <!-- Doctor 1 -->
+          <article
+            class="flex flex-col overflow-hidden rounded-3xl bg-slate-800/90 p-4 ring-1 ring-slate-700/60"
+            data-aos="fade-up"
+          >
+            <img
+              src="https://i.ibb.co/tTJ13q3j/ai-generative-portrait-of-confident-male-doctor-in-white-coat-and-stethoscope-standing-with-arms-cro.jpg"
+              alt="Cardiologist"
+              class="h-44 w-full rounded-2xl object-cover"
+            />
+            <div class="mt-3 space-y-1">
+              <h3 class="text-sm font-semibold text-white">
+                Dr. Arjun Mehta
+              </h3>
+              <p class="text-[11px] font-medium text-teal-300">
+                Senior Cardiologist
+              </p>
+              <p class="text-[11px] text-slate-300">
+                15+ years in interventional cardiology and cardiac emergencies.
+              </p>
+              <div class="mt-2 flex items-center justify-between text-[11px]">
+                <span class="flex items-center gap-1 text-amber-300">
+                  <i class="ri-star-fill text-xs"></i> 4.9 Rating
+                </span>
+                <span class="text-slate-400">MBBS, MD, DM</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Doctor 2 -->
+          <article
+            class="flex flex-col overflow-hidden rounded-3xl bg-slate-800/90 p-4 ring-1 ring-slate-700/60"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <img
+              src="https://i.ibb.co/v4RC1YRB/happy-successful-doctor-woman-standing-600nw-2664143897.webp"
+              alt="Neurologist"
+              class="h-44 w-full rounded-2xl object-cover"
+            />
+            <div class="mt-3 space-y-1">
+              <h3 class="text-sm font-semibold text-white">
+                Dr. Neha Sharma
+              </h3>
+              <p class="text-[11px] font-medium text-teal-300">
+                Consultant Neurologist
+              </p>
+              <p class="text-[11px] text-slate-300">
+                Specialised in stroke, epilepsy and neuro-critical care.
+              </p>
+              <div class="mt-2 flex items-center justify-between text-[11px]">
+                <span class="flex items-center gap-1 text-amber-300">
+                  <i class="ri-star-fill text-xs"></i> 4.8 Rating
+                </span>
+                <span class="text-slate-400">MBBS, MD, DM</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Doctor 3 -->
+          <article
+            class="flex flex-col overflow-hidden rounded-3xl bg-slate-800/90 p-4 ring-1 ring-slate-700/60"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <img
+              src="https://i.ibb.co/v43H2C1P/an-indian-young-female-doctor-isolated-on-green-ai-generated-photo.jpg"
+              alt="Pediatrician"
+              class="h-44 w-full rounded-2xl object-cover"
+            />
+            <div class="mt-3 space-y-1">
+              <h3 class="text-sm font-semibold text-white">
+                Dr. Ananya Rao
+              </h3>
+              <p class="text-[11px] font-medium text-teal-300">
+                Senior Pediatrician
+              </p>
+              <p class="text-[11px] text-slate-300">
+                Child care, vaccinations and growth monitoring expert.
+              </p>
+              <div class="mt-2 flex items-center justify-between text-[11px]">
+                <span class="flex items-center gap-1 text-amber-300">
+                  <i class="ri-star-fill text-xs"></i> 5.0 Rating
+                </span>
+                <span class="text-slate-400">MBBS, MD (Peds)</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Doctor 4 -->
+          <article
+            class="flex flex-col overflow-hidden rounded-3xl bg-slate-800/90 p-4 ring-1 ring-slate-700/60"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <img
+              src="https://i.ibb.co/GvB17t45/360-F-136187711-qe-BMOwk-Pd-Tg1d-CN8e5-TR1-Amdu-XDz60-Xn.jpg"
+              alt="Orthopedic Surgeon"
+              class="h-44 w-full rounded-2xl object-cover"
+            />
+            <div class="mt-3 space-y-1">
+              <h3 class="text-sm font-semibold text-white">
+                Dr. Rohan Kapoor
+              </h3>
+              <p class="text-[11px] font-medium text-teal-300">
+                Orthopedic Surgeon
+              </p>
+              <p class="text-[11px] text-slate-300">
+                Joint replacement & sports injury specialist.
+              </p>
+              <div class="mt-2 flex items-center justify-between text-[11px]">
+                <span class="flex items-center gap-1 text-amber-300">
+                  <i class="ri-star-fill text-xs"></i> 4.7 Rating
+                </span>
+                <span class="text-slate-400">MBBS, MS (Ortho)</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT + IMAGE ================= -->
+    <section
+      id="about"
+      class="py-14 md:py-18 lg:py-20"
+    >
+      <div class="mx-auto max-w-7xl px-4 md:px-6">
+        <div
+          class="grid gap-10 md:grid-cols-2 md:items-center"
+        >
+          <!-- Image Block -->
+          <div
+            class="relative"
+            data-aos="fade-right"
+          >
+            <div
+              class="overflow-hidden rounded-3xl bg-slate-900/5 p-2 shadow-soft"
+            >
+              <img
+                src="https://i.ibb.co/1YMbpV0F/shutterstock-2142668957.jpg"
+                alt="Hospital building"
+                class="h-64 w-full rounded-2xl object-cover sm:h-80 lg:h-96"
+              />
+            </div>
+            <div
+              class="absolute -bottom-4 right-4 rounded-2xl bg-white px-4 py-3 text-xs shadow-soft"
+            >
+              <p class="font-semibold text-slate-800">
+                15+ Years of Excellence
+              </p>
+              <p class="text-[11px] text-slate-500">
+                Serving patients with compassion and advanced care.
+              </p>
+            </div>
+          </div>
+
+          <!-- Text Block -->
+          <div
+            class="space-y-4"
+            data-aos="fade-left"
+          >
+            <p
+              class="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-medium uppercase tracking-wide text-primary"
+            >
+              <i class="ri-hospital-line text-sm"></i>
+              Why Choose MediCare
+            </p>
+            <h2
+              class="text-balance text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl"
+            >
+              Patient-First, Technology-Driven Hospital
+            </h2>
+            <p class="text-sm leading-relaxed text-slate-600 md:text-[15px]">
+              We combine experienced doctors, modern infrastructure and a
+              compassionate nursing team to deliver safe and evidence-based
+              treatment. Every patient is guided with transparency and care.
+            </p>
+
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="space-y-1 text-sm">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-500"
+                  >
+                    <i class="ri-microscope-line text-lg"></i>
+                  </span>
+                  <h3 class="text-sm font-semibold text-slate-900">
+                    Advanced Equipment
+                  </h3>
+                </div>
+                <p class="pl-10 text-[12px] text-slate-600">
+                  Latest operation theatres, modular ICUs and digital diagnostics
+                  for accurate and safe treatment.
+                </p>
+              </div>
+              <div class="space-y-1 text-sm">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="flex h-8 w-8 items-center justify-center rounded-full bg-sky-50 text-sky-500"
+                  >
+                    <i class="ri-nurse-line text-lg"></i>
+                  </span>
+                  <h3 class="text-sm font-semibold text-slate-900">
+                    Compassionate Staff
+                  </h3>
+                </div>
+                <p class="pl-10 text-[12px] text-slate-600">
+                  Trained nurses & support staff ensuring comfort, hygiene and
+                  timely assistance.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="mt-2 flex flex-wrap items-center gap-4 rounded-2xl bg-slate-100/80 p-4 text-xs text-slate-700"
+            >
+              <div class="flex items-center gap-2">
+                <i class="ri-time-line text-primary"></i>
+                <p>OPD Hours: 9:00 AM – 8:00 PM</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="ri-parking-box-line text-primary"></i>
+                <p>Free Parking Available</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="ri-wifi-line text-primary"></i>
+                <p>Wi-Fi & Cafeteria</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DEPARTMENTS ================= -->
+    <section
+      id="departments"
+      class="bg-white py-14 md:py-18 lg:py-20"
+    >
+      <div class="mx-auto max-w-7xl px-4 md:px-6">
+        <div
+          class="mx-auto max-w-2xl text-center"
+          data-aos="fade-up"
+        >
+          <p
+            class="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-medium uppercase tracking-wide text-primary"
+          >
+            <i class="ri-layout-grid-line text-sm"></i>
+            Departments
+          </p>
+          <h2
+            class="mt-3 text-balance text-2xl font-semibold tracking-tight text-slate-900 md:text-3xl"
+          >
+            Multi-Speciality Care Under One Roof
+          </h2>
+          <p class="mt-2 text-sm text-slate-600 md:text-[15px]">
+            A wide range of departments ensure complete care for every age group.
+          </p>
+        </div>
+
+        <div
+          class="mt-8 grid gap-4 text-xs md:grid-cols-3"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="space-y-2 rounded-2xl bg-slate-50 p-4">
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">
+              Cardiac & Critical Care
+            </h3>
+            <ul class="space-y-1 text-slate-600">
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Cardiology & Cardiac Surgery
+              </li>
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Medical & Surgical ICU
+              </li>
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Stroke & Neuro-critical care
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 rounded-2xl bg-slate-50 p-4">
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">
+              Ortho, Neuro & Spine
+            </h3>
+            <ul class="space-y-1 text-slate-600">
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Joint Replacement
+              </li>
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Sports Injury Clinic
+              </li>
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Spine & Neuro Surgery
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 rounded-2xl bg-slate-50 p-4">
+            <h3 class="mb-1 text-sm font-semibold text-slate-900">
+              Women & Child Care
+            </h3>
+            <ul class="space-y-1 text-slate-600">
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Obstetrics & Gynaecology
+              </li>
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Neonatal ICU (NICU)
+              </li>
+              <li class="flex items-center gap-1.5">
+                <i class="ri-checkbox-circle-line text-emerald-500"></i>
+                Pediatrics & Vaccination
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TESTIMONIALS ================= -->
+    <section
+      class="bg-slate-900 py-14 md:py-18 lg:py-20"
+    >
+      <div class="mx-auto max-w-7xl px-4 md:px-6">
+        <div
+          class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+          data-aos="fade-up"
+        >
+          <div>
+            <p
+              class="inline-flex items-center gap-2 rounded-full bg-slate-800 px-3 py-1 text-xs font-medium uppercase tracking-wide text-teal-300"
+            >
+              <i class="ri-chat-smile-2-line text-sm"></i>
+              Patient Stories
+            </p>
+            <h2
+              class="mt-3 text-balance text-2xl font-semibold tracking-tight text-white md:text-3xl"
+            >
+              What Our Patients Say
+            </h2>
+          </div>
+          <p class="text-xs text-slate-400 max-w-md">
+            Real experiences from patients treated at MediCare Hospital. We focus
+            on transparency, empathy and clear communication.
+          </p>
+        </div>
+
+        <div
+          class="mt-8 grid gap-4 md:grid-cols-3"
+        >
+          <!-- Testimonial 1 -->
+          <article
+            class="flex h-full flex-col rounded-3xl bg-slate-800/80 p-4 text-xs text-slate-200 ring-1 ring-slate-700/60"
+            data-aos="fade-up"
+          >
+            <p class="flex-1 leading-relaxed">
+              “The emergency team acted within minutes during my father's heart
+              attack. Doctors explained everything clearly and the nursing staff
+              was extremely caring.”
+            </p>
+            <div class="mt-3 flex items-center justify-between text-[11px]">
+              <div>
+                <p class="font-semibold text-white">Rahul Verma</p>
+                <p class="text-slate-400">Cardiac Emergency</p>
+              </div>
+              <span class="flex items-center gap-1 text-amber-300">
+                <i class="ri-star-fill text-xs"></i> 5.0
+              </span>
+            </div>
+          </article>
+
+          <!-- Testimonial 2 -->
+          <article
+            class="flex h-full flex-col rounded-3xl bg-slate-800/80 p-4 text-xs text-slate-200 ring-1 ring-slate-700/60"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <p class="flex-1 leading-relaxed">
+              “From admission to discharge, the staff ensured my knee replacement
+              surgery was smooth. Physiotherapy team helped me walk confidently
+              again.”
+            </p>
+            <div class="mt-3 flex items-center justify-between text-[11px]">
+              <div>
+                <p class="font-semibold text-white">Savita Desai</p>
+                <p class="text-slate-400">Knee Replacement</p>
+              </div>
+              <span class="flex items-center gap-1 text-amber-300">
+                <i class="ri-star-fill text-xs"></i> 4.8
+              </span>
+            </div>
+          </article>
+
+          <!-- Testimonial 3 -->
+          <article
+            class="flex h-full flex-col rounded-3xl bg-slate-800/80 p-4 text-xs text-slate-200 ring-1 ring-slate-700/60"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <p class="flex-1 leading-relaxed">
+              “Pediatric doctors were very friendly with my child. Vaccination
+              process was quick, and all doubts were cleared patiently.”
+            </p>
+            <div class="mt-3 flex items-center justify-between text-[11px]">
+              <div>
+                <p class="font-semibold text-white">Priya Nair</p>
+                <p class="text-slate-400">Child Care</p>
+              </div>
+              <span class="flex items-center gap-1 text-amber-300">
+                <i class="ri-star-fill text-xs"></i> 4.9
+              </span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT / APPOINTMENT ================= -->
+    <section
+      id="contact"
+      class="py-14 md:py-18 lg:py-20"
+    >
+      <div class="mx-auto max-w-7xl px-4 md:px-6">
+        <div
+          class="grid gap-10 md:grid-cols-[1.1fr,1fr] md:items-start"
+        >
+          <!-- Form -->
+          <div
+            class="rounded-3xl bg-white p-5 shadow-soft ring-1 ring-slate-100"
+            data-aos="fade-right"
+          >
+            <p
+              class="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-medium uppercase tracking-wide text-primary"
+            >
+              <i class="ri-calendar-check-line text-sm"></i>
+              Book an Appointment
+            </p>
+            <h2
+              class="mt-3 text-lg font-semibold tracking-tight text-slate-900 md:text-xl"
+            >
+              Share your details & we will call you back
+            </h2>
+
+            <form class="mt-4 space-y-3 text-xs">
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="space-y-1">
+                  <label class="font-medium text-slate-700">Full Name</label>
+                  <input
+                    type="text"
+                    placeholder="Enter your name"
+                    class="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs outline-none ring-primary/0 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  />
+                </div>
+                <div class="space-y-1">
+                  <label class="font-medium text-slate-700">Mobile Number</label>
+                  <input
+                    type="tel"
+                    placeholder="+91-XXXXXXXXXX"
+                    class="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs outline-none ring-primary/0 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  />
+                </div>
+              </div>
+
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="space-y-1">
+                  <label class="font-medium text-slate-700">Department</label>
+                  <select
+                    class="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs text-slate-700 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  >
+                    <option>Cardiology</option>
+                    <option>Orthopedics</option>
+                    <option>Neurology</option>
+                    <option>Gynecology</option>
+                    <option>Pediatrics</option>
+                    <option>General Medicine</option>
+                  </select>
+                </div>
+                <div class="space-y-1">
+                  <label class="font-medium text-slate-700">Preferred Date</label>
+                  <input
+                    type="date"
+                    class="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs outline-none ring-primary/0 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  />
+                </div>
+              </div>
+
+              <div class="space-y-1">
+                <label class="font-medium text-slate-700">Describe Your Issue</label>
+                <textarea
+                  rows="3"
+                  placeholder="Short description about symptoms or requirement"
+                  class="w-full rounded-xl border border-slate-200 px-3 py-2 text-xs outline-none ring-primary/0 focus:border-primary focus:ring-2 focus:ring-primary/20"
+                ></textarea>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                <div class="flex items-center gap-2 text-[11px] text-slate-500">
+                  <i class="ri-lock-2-line text-slate-400"></i>
+                  <span>Your information is kept 100% confidential.</span>
+                </div>
+                <button
+                  type="submit"
+                  class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-xs font-semibold text-white shadow-soft hover:bg-primary-dark"
+                >
+                  Submit Request
+                  <i class="ri-arrow-right-up-line text-sm"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Contact Details -->
+          <div
+            class="space-y-4"
+            data-aos="fade-left"
+          >
+            <div>
+              <h3 class="text-base font-semibold text-slate-900">
+                Visit Our Hospital
+              </h3>
+              <p class="mt-1 text-xs text-slate-600">
+                MediCare Multi-Speciality Hospital<br />
+                Near City Center, Your Area<br />
+                Your City, State - Pincode
+              </p>
+            </div>
+
+            <div class="space-y-3 text-xs text-slate-700">
+              <div class="flex items-center gap-2">
+                <span
+                  class="flex h-8 w-8 items-center justify-center rounded-full bg-teal-50 text-primary"
+                >
+                  <i class="ri-phone-fill"></i>
+                </span>
+                <div>
+                  <p class="font-medium text-slate-800">Call Us</p>
+                  <p>+91-98765-43210</p>
+                  <p>+91-91234-56789</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <span
+                  class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-500"
+                >
+                  <i class="ri-time-line"></i>
+                </span>
+                <div>
+                  <p class="font-medium text-slate-800">Timings</p>
+                  <p>OPD: 9:00 AM – 8:00 PM</p>
+                  <p>Emergency: 24x7</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <span
+                  class="flex h-8 w-8 items-center justify-center rounded-full bg-violet-50 text-violet-500"
+                >
+                  <i class="ri-mail-line"></i>
+                </span>
+                <div>
+                  <p class="font-medium text-slate-800">Email</p>
+                  <p>info@medicarehospital.in</p>
+                </div>
+              </div>
+            </div>
+            <!-- Map placeholder removed as requested -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="border-t border-slate-200 bg-white py-6">
+      <div
+        class="mx-auto flex max-w-7xl flex-col gap-4 px-4 text-xs text-slate-500 md:flex-row md:items-center md:justify-between md:px-6"
+      >
+        <p>
+          © <span id="year"></span> MediCare Multi-Speciality Hospital. All
+          rights reserved.
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="flex items-center gap-1">
+            <i class="ri-shield-check-line text-primary"></i>
+            NABH & ISO Compliant
+          </span>
+          <span class="flex gap-2 text-slate-400">
+            <i class="ri-facebook-circle-fill text-lg"></i>
+            <i class="ri-instagram-line text-lg"></i>
+            <i class="ri-twitter-x-line text-lg"></i>
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+      // Mobile menu toggle with animation
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileNav = document.getElementById("mobile-nav");
+
+      if (menuToggle && mobileNav) {
+        menuToggle.addEventListener("click", () => {
+          const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+          menuToggle.setAttribute("aria-expanded", String(!expanded));
+
+          if (expanded) {
+            // Close
+            mobileNav.classList.remove("max-h-96", "opacity-100");
+            mobileNav.classList.add("max-h-0", "opacity-0");
+            menuToggle.innerHTML = '<i class="ri-menu-line text-xl"></i>';
+          } else {
+            // Open
+            mobileNav.classList.remove("max-h-0", "opacity-0");
+            mobileNav.classList.add("max-h-96", "opacity-100");
+            menuToggle.innerHTML = '<i class="ri-close-line text-xl"></i>';
+          }
+        });
+
+        // Close mobile nav on link click
+        mobileNav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileNav.classList.remove("max-h-96", "opacity-100");
+            mobileNav.classList.add("max-h-0", "opacity-0");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.innerHTML = '<i class="ri-menu-line text-xl"></i>';
+          });
+        });
+      }
+
+      // Current year in footer
+      document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+      // AOS init
+      AOS.init({
+        duration: 800,
+        offset: 80,
+        once: true,
+        easing: "ease-out",
+      });
+    </script>
+  </body>
+</html>
