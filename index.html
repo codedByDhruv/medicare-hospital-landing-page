@@ -51,12 +51,6 @@
       rel="stylesheet"
     />
 
-    <!-- AOS (Animate On Scroll) -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-    />
-
     <!-- Custom Base Styles -->
     <style>
       body {
@@ -297,7 +291,7 @@
             <img
               src="https://i.ibb.co/CsPycHTh/451054.jpg"
               alt="Doctors at MediCare Hospital"
-              class="h-64 w-full rounded-2xl object-cover sm:h-80 lg:h-96"
+              class="hero-image h-64 w-full rounded-2xl object-cover sm:h-80 lg:h-96"
             />
 
             <!-- Floating Card -->
@@ -1120,8 +1114,9 @@
       </div>
     </footer>
 
-    <!-- AOS Script -->
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <!-- GSAP (Animations) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <!-- Custom JS -->
     <script>
@@ -1162,13 +1157,130 @@
       document.getElementById("year").textContent =
         new Date().getFullYear();
 
-      // AOS init
-      AOS.init({
-        duration: 800,
-        offset: 80,
-        once: true,
-        easing: "ease-out",
+      // ---------------------------
+      // GSAP ScrollTrigger Anims
+      // ---------------------------
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Map your data-aos types to "from" animation values
+      const AOS_MAP = {
+        "fade-right": { x: -60, y: 0, opacity: 0 },
+        "fade-left": { x: 60, y: 0, opacity: 0 },
+        "fade-up": { x: 0, y: 40, opacity: 0 },
+        "fade-in": { x: 0, y: 0, opacity: 0 }
+      };
+
+      // Helper to parse delay attributes (data-aos-delay expects ms like 100, 200)
+      function parseDelay(el) {
+        const raw = el.getAttribute("data-aos-delay");
+        const n = parseInt(raw, 10);
+        return isNaN(n) ? 0 : n / 1000;
+      }
+
+      // Generic animation for elements with data-aos
+      document.querySelectorAll("[data-aos]").forEach((el) => {
+        const type = el.getAttribute("data-aos");
+        const fromVars = AOS_MAP[type] || { x: 0, y: 30, opacity: 0 };
+        const delay = parseDelay(el);
+        // allow override duration with data-aos-duration (ms)
+        const durRaw = el.getAttribute("data-aos-duration");
+        const duration = durRaw ? Math.max(0.3, parseInt(durRaw, 10) / 1000) : 0.8;
+
+        gsap.from(el, {
+          ...fromVars,
+          duration: duration,
+          delay: delay,
+          ease: "power3.out",
+          opacity: fromVars.opacity !== undefined ? fromVars.opacity : 0,
+          x: fromVars.x || 0,
+          y: fromVars.y || 0,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+            // optimize for performance: don't refresh on every resize
+            invalidateOnRefresh: false
+          }
+        });
       });
+
+      // Batch animations for repeated items (cards, testimonials) to improve performance
+      // Services/doctor/testimonial cards typically have data-aos="fade-up"
+      const batchSelectors = [
+        "#services article",
+        "#doctors article",
+        ".mt-8.grid > article", // some variants
+        ".mt-8.grid > div article", // defensive
+        ".mt-8.grid article"
+      ];
+
+      batchSelectors.forEach((sel) => {
+        const nodes = gsap.utils.toArray(sel);
+        if (nodes.length) {
+          ScrollTrigger.batch(nodes, {
+            start: "top 90%",
+            onEnter: (batch) => {
+              gsap.to(batch, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.08,
+                duration: 0.7,
+                ease: "power3.out",
+                overwrite: true
+              });
+            },
+            onLeaveBack: (batch) => {
+              gsap.to(batch, { opacity: 0, y: 20, duration: 0.4, stagger: 0.05 });
+            },
+            // set initial state so gsap.from above doesn't conflict
+            onRefresh: () => {
+              nodes.forEach(n => {
+                // if element hasn't been animated yet, ensure initial state
+                if (!n.__gsapInited) {
+                  gsap.set(n, { opacity: 0, y: 20 });
+                  n.__gsapInited = true;
+                }
+              });
+            }
+          });
+        }
+      });
+
+      // Subtle infinite floating on the hero image
+      gsap.to(".hero-image", {
+        y: -10,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+
+      // Optional: small parallax on the decorative circles
+      gsap.to(".pointer-events-none", {
+        y: 20,
+        duration: 8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+
+      // Accessibility: reduce motion if user prefers reduced-motion
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      if (mq.matches) {
+        // kill ScrollTrigger animations and set elements to final visible state
+        ScrollTrigger.getAll().forEach(st => st.kill());
+        gsap.globalTimeline.clear();
+        document.querySelectorAll("[data-aos]").forEach(el => {
+          el.style.opacity = 1;
+          el.style.transform = "none";
+        });
+        // stop hero motion
+        gsap.killTweensOf(".hero-image");
+        gsap.killTweensOf(".pointer-events-none");
+      }
+
+      // End GSAP block
     </script>
   </body>
 </html>
